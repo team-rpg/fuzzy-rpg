@@ -1,0 +1,39 @@
+{
+  "name": "team-rpg/rpg",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "core\\": "core/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Thibaut CHIRON",
+      "email": "chiron.thibaut@sfr.fr",
+      "role": "Formateur"
+    },
+    {
+      "name": "Pierre-Augustin VALLIN",
+      "email": "",
+      "role": "Apprenant Développeur"
+    },
+    {
+      "name": "Arthur POULAIN",
+      "email": "",
+      "role": "Apprenant Développeur"
+    },
+    {
+      "name": "Matthieu SIMMONET",
+      "email": "",
+      "role": "Apprenant Développeur"
+    },
+    {
+      "name": "Enric MOREL",
+      "email": "",
+      "role": "Apprenant Développeur"
+    }
+  ],
+  "require-dev": {
+    "symfony/var-dumper": "^5.3"
+  }
+}
