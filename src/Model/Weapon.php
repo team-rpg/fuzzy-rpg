@@ -4,33 +4,53 @@ namespace App\Model\Equipment;
 
 abstract class Weapon extends Equipment
 {
-    protected int $attack;
-
-    public function __construct(int $attack)
-    {
-        $this->attack = $attack;
-    }
+    protected int $damage;
+    protected bool $isEquipped;
 
     /**
-     * Get the value of attack
+     * Get the value of damage
      *
      * @return int
      */
-    public function getAttack(): int
+    public function getDamage(): int
     {
-        return $this->attack;
+        return $this->damage;
     }
 
     /**
-     * Set the value of attack
+     * Set the value of damage
      *
-     * @param int $attack
+     * @param int $damage
      *
      * @return static
      */
-    public function setAttack(int $attack): static
+    public function setDamage(int $damage): static
     {
-        $this->attack = $attack;
+        $this->damage = $damage;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isEquipped
+     *
+     * @return bool
+     */
+    public function getIsEquipped(): bool
+    {
+        return $this->isEquipped;
+    }
+
+    /**
+     * Set the value of isEquipped
+     *
+     * @param bool $isEquipped
+     *
+     * @return static
+     */
+    public function setIsEquipped(bool $isEquipped): static
+    {
+        $this->isEquipped = $isEquipped;
 
         return $this;
     }
