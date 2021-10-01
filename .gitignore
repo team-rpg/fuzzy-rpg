@@ -1,3 +1,6 @@
 vendor/
 .idea/
+config/mysql.ini
 UML.mdj
+BDD-MMORPG.mdj
+mmorpg.sql
