@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Dao\CharacterDao;
 use PDOException;
 use App\Model\User;
 use App\Dao\UserDao;
@@ -343,6 +344,13 @@ class UserController extends AbstractController
 
         try {
             $user = (new UserDao())->getUserByEmail($_SESSION['user']['user_email']);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+        try {
+            $characters = (new CharacterDao())->getAllUserCharacters(1);
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }

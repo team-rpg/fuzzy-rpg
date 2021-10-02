@@ -4,7 +4,6 @@ namespace App\Model;
 
 class User
 {
-
     private int     $user_id;
     private string  $user_firstname;
     private string  $user_lastname;

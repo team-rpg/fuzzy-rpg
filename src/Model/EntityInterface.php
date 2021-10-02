@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\Model;
+
+use App\Model\Entity;
+use App\Model\Equipment;
 
 interface EntityInterface
 {

@@ -1,25 +1,15 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\Model;
+
+use App\Model\Character;
 
 class Warrior extends Character
 {
-    public int $rage;
+    private int $rage;
 
-    public function __construct(
-        string $name,
-        int $health,
-        int $level,
-        array $equipment,
-        int $money,
-        int $rage
-    ) {
-        $this->name = $name;
-        $this->health = $health;
-        $this->level = $level;
-        $this->equipment = $equipment;
-        $this->money = $money;
-        $this->rage = $rage;
+    public function __construct() {
+
     }
 
     /**
@@ -37,9 +27,9 @@ class Warrior extends Character
      *
      * @param int $rage
      *
-     * @return self
+     * @return static
      */
-    public function setRage(int $rage): self
+    public function setRage(int $rage): static
     {
         $this->rage = $rage;
 

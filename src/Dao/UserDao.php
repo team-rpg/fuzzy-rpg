@@ -24,6 +24,7 @@ class UserDao extends AbstractDao
         $request->execute([
             ":id" => $id
         ]);
+
         return $request->fetchObject(User::class);
     }
 

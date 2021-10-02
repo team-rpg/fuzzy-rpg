@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\Model;
+
+use App\Model\Equipment;
 
 abstract class Entity implements EntityInterface
 {
@@ -30,8 +32,12 @@ abstract class Entity implements EntityInterface
         $this->health = max([$this->health, 0]);
         // regarder si il a une armure , si elle est equiper, on compare les degats a la valeur de l'armure  et le resultat soustraie de la vie
     }
+    
     public function loot(): Equipment
     {
+        $equipment = new Equipment();
+
+        return $equipment;
     }
 
     /**
@@ -49,9 +55,9 @@ abstract class Entity implements EntityInterface
      *
      * @param string $name
      *
-     * @return self
+     * @return static
      */
-    public function setName(string $name): self
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -73,9 +79,9 @@ abstract class Entity implements EntityInterface
      *
      * @param int $health
      *
-     * @return self
+     * @return static
      */
-    public function setHealth(int $health): self
+    public function setHealth(int $health): static
     {
         $this->health = $health;
 
@@ -97,9 +103,9 @@ abstract class Entity implements EntityInterface
      *
      * @param int $level
      *
-     * @return self
+     * @return static
      */
-    public function setLevel(int $level): self
+    public function setLevel(int $level): static
     {
         $this->level = $level;
 
@@ -121,9 +127,9 @@ abstract class Entity implements EntityInterface
      *
      * @param array $equipment
      *
-     * @return self
+     * @return static
      */
-    public function setEquipment(array $equipment): self
+    public function setEquipment(array $equipment): static
     {
         $this->equipment = $equipment;
 
@@ -145,9 +151,9 @@ abstract class Entity implements EntityInterface
      *
      * @param int $money
      *
-     * @return self
+     * @return static
      */
-    public function setMoney(int $money): self
+    public function setMoney(int $money): static
     {
         $this->money = $money;
 

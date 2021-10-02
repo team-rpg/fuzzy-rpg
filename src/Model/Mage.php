@@ -1,25 +1,15 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\Model;
+
+use App\Model\Character;
 
 class Mage extends Character
 {
-    public int $mana;
+    private int $mana;
 
     public function __construct(
-        string $name,
-        int $health,
-        int $level,
-        array $equipment,
-        int $money,
-        int $mana
     ) {
-        $this->name = $name;
-        $this->health = $health;
-        $this->level = $level;
-        $this->equipment = $equipment;
-        $this->money = $money;
-        $this->mana = $mana;
     }
 
     /**
@@ -37,9 +27,9 @@ class Mage extends Character
      *
      * @param int $mana
      *
-     * @return self
+     * @return static
      */
-    public function setMana(int $mana): self
+    public function setMana(int $mana): static
     {
         $this->mana = $mana;
 

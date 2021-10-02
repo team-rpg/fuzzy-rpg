@@ -1,25 +1,15 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\Model;
+
+use App\Model\Character;
 
 class Archer extends Character
 {
-    protected int $energy;
+    private int $energy;
 
     public function __construct(
-        string $name,
-        int $health,
-        int $level,
-        array $equipment,
-        int $money,
-        int $energy
     ) {
-        $this->name = $name;
-        $this->health = $health;
-        $this->level = $level;
-        $this->equipment = $equipment;
-        $this->money = $money;
-        $this->energy = $energy;
     }
     /**
      * Get the value of energy
@@ -36,9 +26,9 @@ class Archer extends Character
      *
      * @param int $energy
      *
-     * @return self
+     * @return static
      */
-    public function setEnergy(int $energy): self
+    public function setEnergy(int $energy): static
     {
         $this->energy = $energy;
 

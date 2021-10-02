@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Equipment;
+namespace App\Model;
 
 abstract class Armor extends Equipment
 {

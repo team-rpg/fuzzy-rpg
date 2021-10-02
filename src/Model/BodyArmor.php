@@ -1,17 +1,10 @@
 <?php
 
-namespace App\Model\Equipment;
+namespace App\Model;
 
 class BodyArmor extends Armor {
 
-    public function __construct(
-        string $name,
-        int $defense,
-        bool $isEquipped = false
-    ) {
-        $this->name = $name;
-        $this->defense = $defense;
-        $this->isEquipped = $isEquipped;
+    public function __construct() {
     }
 
 }
