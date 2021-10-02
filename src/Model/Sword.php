@@ -7,9 +7,11 @@ class Sword extends Weapon
 
     public function __construct(
         string $name,
-        int $attack
+        int $damage,
+        bool $isEquipped
     ) {
         $this->name = $name;
-        $this->attack = $attack;
+        $this->damage = $damage;
+        $this->isEquipped = $isEquipped;
     }
 }

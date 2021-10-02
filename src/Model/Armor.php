@@ -5,6 +5,7 @@ namespace App\Model\Equipment;
 abstract class Armor extends Equipment
 {
     protected int $defense;
+    protected bool $isEquipped;
 
     /**
      * Get the value of defense
@@ -26,6 +27,30 @@ abstract class Armor extends Equipment
     public function setDefense(int $defense): static
     {
         $this->defense = $defense;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isEquipped
+     *
+     * @return bool
+     */
+    public function getIsEquipped(): bool
+    {
+        return $this->isEquipped;
+    }
+
+    /**
+     * Set the value of isEquipped
+     *
+     * @param bool $isEquipped
+     *
+     * @return static
+     */
+    public function setIsEquipped(bool $isEquipped): static
+    {
+        $this->isEquipped = $isEquipped;
 
         return $this;
     }
