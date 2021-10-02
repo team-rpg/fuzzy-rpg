@@ -1,21 +1,31 @@
 <nav>
+    <?php echo "<a href='/'>Home</a> "; ?>
+
     <?php
-    if(isset($_SESSION) && empty($_SESSION['user'])) {
-    echo "<a href=''>S'enregistrer</a> ";
-    echo "<a href=''>Se connecter</a>";
+    if (isset($_SESSION) && empty($_SESSION)) {
+        echo "<a href='/user/signup'>S'enregistrer</a> ";
+        echo "<a href='/user/signin'>Se connecter</a>";
     }
     ?>
 
     <!-- Une fois connecté  -->
     <?php
-    if(isset($_SESSION) && !empty($_SESSION['user'])) {
-    echo "<a href=''>Profil</a>";
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        echo "<a href='/user/profil'>Profil</a>";
     }
     ?>
 
     <!-- Partie admin -->
     <?php
-    if(isset($_SESSION) && !empty($_SESSION['user']) && $_SESSION['user']['is_admin'] === 1)
-    echo "<a href=''>Liste des utilisateurs</a>"
+    if (isset($_SESSION['user']) && isset($_SESSION['user']['is_admin'])) {
+        if(!empty($_SESSION['user']) && $_SESSION['user']['is_admin'] == 1)
+        echo "<a href='/user/index'>Liste des utilisateurs</a>";
+    }
+    ?>
+
+    <?php
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        echo "<a href='/user/logout'>Déconnexion</a> ";
+    }
     ?>
 </nav>
