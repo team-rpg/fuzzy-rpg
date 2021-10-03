@@ -176,6 +176,7 @@ class UserController extends AbstractController
                             $id = $user->getUserId();
                             header(sprintf("Location: /user/%d/show", $id));
 
+                            $_SESSION['user']['user_id'] = $id;
                             $_SESSION['user']['user_email'] = $userRegister_post["user_email"];
                             $_SESSION['user']['is_admin'] = $user->getIsAdmin();
 
@@ -349,7 +350,7 @@ class UserController extends AbstractController
         }
 
         try {
-            $characters = (new CharacterDao())->getAllUserCharacters(1);
+            $characters = (new CharacterDao())->getAllUserCharacters($_SESSION['user']['user_id']);
 
         } catch (Exception $e) {
             echo $e->getMessage();

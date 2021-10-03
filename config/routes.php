@@ -10,4 +10,7 @@ $router->add("/user/logout", ['GET', 'POST'], 'App\Controller\UserController', '
 $router->add("/user/(\d+)/show", ['GET'], 'App\Controller\UserController', 'show', 'show');
 $router->add("/user/(\d+)/edit", ['GET', 'POST'], 'App\Controller\UserController', 'edit', 'edit');
 $router->add("/user/(\d+)/delete", ['GET'], 'App\Controller\UserController', 'delete', 'delete');
+
 $router->add("/user/createCharacter", ['GET', 'POST'], 'App\Controller\CharacterController', 'createCharacter', 'create_character');
+$router->add("/user/(\d+)/deleteCharacter", ['GET'], 'App\Controller\CharacterController', 'deleteCharacter', 'delete');
+

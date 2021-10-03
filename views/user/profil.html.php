@@ -1,14 +1,12 @@
-<?php
-
-require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error_message.html.php"]); ?>
+<?php require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error_message.html.php"]); ?>
 
 <h1>Profil de <?= $user->getUserFirstname(); ?> </h1>
 
 <h2>Liste des personnages :</h2>
 
 <?php foreach ($characters as $character) : ?>
-
     <div>
+        
         <span>Nom: <?= $character->getName() ?></span>
         <br>
         <br>
@@ -17,11 +15,11 @@ require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error_message.html.php"]); ?>
         <br>
         <span>Niveau: <?= $character->getLevel()  ?></span>
         <br>
-        <!-- <span>Experience: 0</span> -->
+        <span>Experience: <?= $character->getXp() ?></span>
         <br>
         <span>Vie: <?= $character->getHealth()  ?></span>
         <br>
-        <!-- <span>Stat secondaire: 0</span> -->
+        <span><?= $character->getSecondaryStatName() ?>: <?= $character->getSecondaryStatValue() ?></span>
         <br>
         <span>Argent: <?= $character->getMoney() ?></span>
         <br>
@@ -62,6 +60,10 @@ require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error_message.html.php"]); ?>
         </span>
         <br>
     </div>
+
+    <a href="<?= sprintf('/user/%d/deleteCharacter', $character->getId()) ?>">Supprimer personnage</a>
+    <br>
+    =======================================
 
 <?php endforeach; ?>
 <br>
