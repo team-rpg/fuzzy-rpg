@@ -14,7 +14,6 @@ use App\Model\Staff;
 use App\Model\Sword;
 
 use App\Model\BodyArmor;
-use App\Model\Character;
 use App\Model\Helmet;
 
 class CharacterDao extends AbstractDao {
@@ -76,13 +75,13 @@ class CharacterDao extends AbstractDao {
             foreach ($charactersWeaponData as $characterWeapon) {
                 
                 switch ($characterWeapon['weapon_type']) {
-                    case '1':
+                    case 'Sword':
                         $weapon = new Sword();
                         break;
-                    case '2':
+                    case 'Staff':
                         $weapon = new Staff();
                         break;
-                    case '3':
+                    case 'Bow':
                         $weapon = new Bow();
                         break;
                     default:
@@ -140,8 +139,32 @@ class CharacterDao extends AbstractDao {
 
     public function createCharacter(string $character_nickname, int $class_id, int $user_id): void {
 
-        $newCharacter = $this->pdo->prepare("INSERT INTO `character` (character_nickname, user_id, class_id) VALUES (:character_nickname, :user_id, :class_id)");
+        $characterHealth = 0;
+
+        switch ($class_id) {
+            // Warrior
+            case '1':
+                $characterHealth = 100;
+                break;
+            
+            // Mage
+            case '2':
+                $characterHealth = 80;
+                break;
+
+            // Archer
+            case '3':
+                $characterHealth = 90;
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        $newCharacter = $this->pdo->prepare("INSERT INTO `character` (character_health, character_nickname, user_id, class_id) VALUES (:character_health, :character_nickname, :user_id, :class_id)");
         $newCharacter->execute(array(
+            ":character_health" => $characterHealth,
             ":character_nickname" => $character_nickname,
             ":user_id" => $user_id,
             ":class_id" => $class_id

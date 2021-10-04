@@ -10,8 +10,8 @@ abstract class Character extends Entity
     protected string $id;
     protected int    $classId;
     protected string $className;
-    protected string $secondary_stat_name;
-    protected string $secondary_stat_value;
+    protected string $secondaryStatName;
+    protected string $secondaryStatValue;
     protected string $xp;
 
     public function skillAttack(): void
@@ -49,19 +49,19 @@ abstract class Character extends Entity
      */
     public function getSecondaryStatName(): string
     {
-        return $this->secondary_stat_name;
+        return $this->secondaryStatName;
     }
 
     /**
      * Set the value of secondary_stat_name
      *
-     * @param string $secondary_stat_name
+     * @param string $secondaryStatName
      *
      * @return static
      */
-    public function setSecondaryStatName(string $secondary_stat_name): static
+    public function setSecondaryStatName(string $secondaryStatName): static
     {
-        $this->secondary_stat_name = $secondary_stat_name;
+        $this->secondaryStatName = $secondaryStatName;
 
         return $this;
     }
@@ -115,25 +115,25 @@ abstract class Character extends Entity
     }
 
     /**
-     * Get the value of secondary_stat_value
+     * Get the value of secondaryStatValue
      *
      * @return string
      */
     public function getSecondaryStatValue(): string
     {
-        return $this->secondary_stat_value;
+        return $this->secondaryStatValue;
     }
 
     /**
-     * Set the value of secondary_stat_value
+     * Set the value of secondaryStatValue
      *
-     * @param string $secondary_stat_value
+     * @param string $secondaryStatValue
      *
      * @return static
      */
-    public function setSecondaryStatValue(string $secondary_stat_value): static
+    public function setSecondaryStatValue(string $secondaryStatValue): static
     {
-        $this->secondary_stat_value = $secondary_stat_value;
+        $this->secondaryStatValue = $secondaryStatValue;
 
         return $this;
     }
