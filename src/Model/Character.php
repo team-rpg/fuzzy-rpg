@@ -12,7 +12,7 @@ abstract class Character extends Entity
     protected string $className;
     protected string $secondaryStatName;
     protected string $secondaryStatValue;
-    protected string $xp;
+    protected int $xp;
 
     public function skillAttack(): void
     {
@@ -93,7 +93,7 @@ abstract class Character extends Entity
     /**
      * Get the value of xp
      *
-     * @return string
+     * @return int
      */
     public function getXp(): string
     {
@@ -103,11 +103,11 @@ abstract class Character extends Entity
     /**
      * Set the value of xp
      *
-     * @param string $xp
+     * @param int $xp
      *
      * @return static
      */
-    public function setXp(string $xp): static
+    public function setXp(int $xp): static
     {
         $this->xp = $xp;
 
