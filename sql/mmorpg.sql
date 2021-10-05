@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 04 oct. 2021 à 10:05
+-- Généré le : mar. 05 oct. 2021 à 09:35
 -- Version du serveur : 8.0.26
 -- Version de PHP : 8.0.11
 
@@ -193,6 +193,7 @@ CREATE TABLE IF NOT EXISTS `monster` (
   `monster_health` int NOT NULL,
   `monster_dmg` int NOT NULL,
   `monster_armor` int NOT NULL,
+  `monster_xp` int NOT NULL,
   `monster_category_id` int NOT NULL,
   PRIMARY KEY (`monster_id`),
   UNIQUE KEY `monster_name` (`monster_name`),
@@ -203,10 +204,10 @@ CREATE TABLE IF NOT EXISTS `monster` (
 -- Déchargement des données de la table `monster`
 --
 
-INSERT INTO `monster` (`monster_id`, `monster_name`, `monster_picture`, `monster_desc`, `monster_health`, `monster_dmg`, `monster_armor`, `monster_category_id`) VALUES
-(1, 'Slime', 'N/A', 'entitées visceuses vivant dans les endroits sombres et humides , pouvant empoisonner leurs cibles avec des maladies.', 50, 5, 1, 1),
-(2, 'Scorpion Ravageur', 'N/A', 'entitées toxiques et rapide vivant proches des habitations désertiques , pouvant empoisonner leurs cibles avec des maladies et se cammoufler sous le sable', 200, 20, 20, 2),
-(3, 'Gardien Gobelin Gris', 'N/A', 'entitées humanoïdes très agiles attaquant en nombre , vivant dans de petits camps désertiques , pouvant utiliser des armes.', 50, 23, 15, 2);
+INSERT INTO `monster` (`monster_id`, `monster_name`, `monster_picture`, `monster_desc`, `monster_health`, `monster_dmg`, `monster_armor`, `monster_xp`, `monster_category_id`) VALUES
+(1, 'Slime', '/assets/img/slime.jpg', 'entitées visceuses vivant dans les endroits sombres et humides , pouvant empoisonner leurs cibles avec des maladies.', 50, 5, 1, 20, 1),
+(2, 'Scorpion Ravageur', '/assets/img/scorpion_ravageur.jpg', 'entitées toxiques et rapide vivant proches des habitations désertiques , pouvant empoisonner leurs cibles avec des maladies et se cammoufler sous le sable', 200, 20, 20, 35, 2),
+(3, 'Gardien Gobelin Gris', '/assets/img/gobelin_gris.jpg', 'entitées humanoïdes très agiles attaquant en nombre , vivant dans de petits camps désertiques , pouvant utiliser des armes.', 50, 23, 15, 40, 2);
 
 -- --------------------------------------------------------
 
@@ -247,14 +248,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_created_at`, `is_admin`) VALUES
-(1, 'Toto', 'x', 'mmo@test.fr', '$2y$10$H/5ncsOhzDD/9I1XOEc5wuF5mRRB2HCP.QhOJ.HGmVVfvmH0ymL1.', '2021-09-30 12:42:10', 0);
+(1, 'Toto', 'x', 'mmo@test.fr', '$2y$10$GUDmZFJChbtP5RDOrfn/TuoZALnAX6LBrwBxISNwXWs1CJpekbs8G', '2021-09-30 12:42:10', 0),
+(2, 'Test', 'x', 'test1@test.fr', '$2y$10$GUDmZFJChbtP5RDOrfn/TuoZALnAX6LBrwBxISNwXWs1CJpekbs8G', '2021-10-05 10:43:28', 0);
 
 -- --------------------------------------------------------
 
