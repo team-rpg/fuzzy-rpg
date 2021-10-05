@@ -8,10 +8,6 @@ class Mage extends Character
 {
     private int $mana;
 
-    public function __construct(
-    ) {
-    }
-
     /**
      * Get the value of mana
      *

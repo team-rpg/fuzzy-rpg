@@ -31,13 +31,20 @@ class UserController extends AbstractController
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
         if ('GET' === $request_method) {
-            ob_start();
-            $title = 'Enregistrement utilisateur';
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signup.html.php']);
-            $content = ob_get_clean();
+            // ob_start();
+            // $title = 'Enregistrement utilisateur';
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signup.html.php']);
+            // $content = ob_get_clean();
 
-            // Appeler le layout
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+            // // Appeler le layout
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["user", "signup.html.php"],
+                ["title" => 'Enregistrement utilisateur']
+            );
+
         } elseif ('POST' === $request_method) {
             $args = [
                 "user_firstname" => [],
@@ -80,14 +87,27 @@ class UserController extends AbstractController
                 $error_messages[] = "Les mots de passes ne correspondent pas.";
             }
 
-            $user = (new User())->setUserFirstname($userRegister_post["user_firstname"])
-                ->setUserLastname($userRegister_post["user_lastname"])
-                ->setUserEmail($userRegister_post["user_email"])
-                ->setUserPassword($userRegister_post["user_password"])
-                ->setIsAdmin(0);
+            try {
+                $users = (new UserDao())->getAllUsers();
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
+
+            foreach ($users as $user) {
+                if($userRegister_post['user_email'] == $user->getUserEmail()) {
+                    $error_messages[] = "Email déjà prit !";
+                    break;
+                }
+            }
 
             if (empty($error_messages)) {
                 try {
+                    $user = (new User())->setUserFirstname($userRegister_post["user_firstname"])
+                    ->setUserLastname($userRegister_post["user_lastname"])
+                    ->setUserEmail($userRegister_post["user_email"])
+                    ->setUserPassword($userRegister_post["user_password"])
+                    ->setIsAdmin(0);
+
                     $id = (new UserDao())->newUser($user);
                     header(sprintf("Location: /user/%d/show", $id));
 
@@ -105,13 +125,20 @@ class UserController extends AbstractController
                     echo $e->getMessage();
                 }
             } else {
-                ob_start();
-                $title = 'Enregistrement utilisateur';
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signup.html.php']);
-                $content = ob_get_clean();
 
-                // Appeler le layout
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                // ob_start();
+                // $title = 'Enregistrement utilisateur';
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signup.html.php']);
+                // $content = ob_get_clean();
+
+                // // Appeler le layout
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "signup.html.php"],
+                    ["title" => 'Enregistrement utilisateur']
+                );
             }
         }
     }
@@ -124,13 +151,19 @@ class UserController extends AbstractController
 
         // Si c'est get :
         if ('GET' === $request_method) {
-            ob_start();
-            $title = 'Connexion utilisateur';
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
-            $content = ob_get_clean();
+            // ob_start();
+            // $title = 'Connexion utilisateur';
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
+            // $content = ob_get_clean();
 
-            // Appeler le layout
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+            // // Appeler le layout
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["user", "signin.html.php"],
+                ["title" => 'Connexion utilisateur']
+            );
         } elseif ('POST' === $request_method) {
             $args = [
                 "user_email" => [],
@@ -187,31 +220,49 @@ class UserController extends AbstractController
                             echo $e->getMessage();
                         }
                     } else {
-                        ob_start();
-                        $title = 'Connexion utilisateur';
-                        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
-                        $content = ob_get_clean();
+                        // ob_start();
+                        // $title = 'Connexion utilisateur';
+                        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
+                        // $content = ob_get_clean();
 
-                        // Appeler le layout
-                        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                        // // Appeler le layout
+                        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                        $this->renderer->render(
+                            ["layout.html.php"],
+                            ["user", "signin.html.php"],
+                            ["title" => 'Connexion utilisateur']
+                        );
                     }
                 } else {
-                    ob_start();
-                    $title = 'Connexion utilisateur';
-                    require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
-                    $content = ob_get_clean();
+                    // ob_start();
+                    // $title = 'Connexion utilisateur';
+                    // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
+                    // $content = ob_get_clean();
 
-                    // Appeler le layout
-                    require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                    // // Appeler le layout
+                    // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                    $this->renderer->render(
+                        ["layout.html.php"],
+                        ["user", "signin.html.php"],
+                        ["title" => 'Connexion utilisateur']
+                    );
                 }
             } else {
-                ob_start();
-                $title = 'Connexion utilisateur';
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
-                $content = ob_get_clean();
+                // ob_start();
+                // $title = 'Connexion utilisateur';
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'signin.html.php']);
+                // $content = ob_get_clean();
 
-                // Appeler le layout
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                // // Appeler le layout
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "signin.html.php"],
+                    ["title" => 'Connexion utilisateur']
+                );
             }
         }
     }
@@ -223,13 +274,19 @@ class UserController extends AbstractController
 
             if (!is_null($user)) {
                 // Appeler (inclure) la vue
-                ob_start();
-                $title = $user->getUserFirstname();
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "show.html.php"]);
-                $content = ob_get_clean();
+                // ob_start();
+                // $title = $user->getUserFirstname();
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "show.html.php"]);
+                // $content = ob_get_clean();
 
-                // Appeler le layout
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                // // Appeler le layout
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "show.html.php"],
+                    ["title" => "$user->getUserFirstname()", "user" => $user]
+                );
             } else {
                 header("Location: /");
                 exit;
@@ -254,13 +311,19 @@ class UserController extends AbstractController
                 exit;
             } elseif ('GET' === $request_method) {
                 // Appeler (inclure) la vue
-                ob_start();
-                $title = "Editer {$user->getUserFirstname()}";
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "edit.html.php"]);
-                $content = ob_get_clean();
+                // ob_start();
+                // $title = "Editer {$user->getUserFirstname()}";
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "edit.html.php"]);
+                // $content = ob_get_clean();
 
-                // Appeler le layout
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                // // Appeler le layout
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "edit.html.php"],
+                    ["title" => "Editer {$user->getUserFirstname()}"]
+                );
             } elseif ('POST' === $request_method) {
                 $args = [
                     "user_firstname" => [],
@@ -303,13 +366,19 @@ class UserController extends AbstractController
                     exit;
                 } else {
 
-                    ob_start();
-                    $title = "Editer {$user->getUserFirstname()}";
-                    require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "edit.html.php"]);
-                    $content = ob_get_clean();
+                    // ob_start();
+                    // $title = "Editer {$user->getUserFirstname()}";
+                    // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "edit.html.php"]);
+                    // $content = ob_get_clean();
 
-                    // Appeler le layout
-                    require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                    // // Appeler le layout
+                    // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                    $this->renderer->render(
+                        ["layout.html.php"],
+                        ["user", "edit.html.php"],
+                        ["title" => "Editer {$user->getUserFirstname()}"]
+                    );
                 }
             }
         } catch (PDOException $e) {
@@ -341,13 +410,19 @@ class UserController extends AbstractController
     public function logout(): void
     {
 
-        ob_start();
-        $title = "Déconnexion";
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "logout.html.php"]);
-        $content = ob_get_clean();
+        // ob_start();
+        // $title = "Déconnexion";
+        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "logout.html.php"]);
+        // $content = ob_get_clean();
 
-        // Appeler le layout
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        // // Appeler le layout
+        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["user", "logout.html.php"],
+            ["title" => 'Déconnexion']
+        );
     }
 
     public function profil(): void {
@@ -365,12 +440,18 @@ class UserController extends AbstractController
             echo $e->getMessage();
         }
 
-        ob_start();
-        $title = "Profil";
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "profil.html.php"]);
-        $content = ob_get_clean();
+        // ob_start();
+        // $title = "Profil";
+        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "user", "profil.html.php"]);
+        // $content = ob_get_clean();
 
-        // Appeler le layout
-        require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+        // // Appeler le layout
+        // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+        $this->renderer->render(
+            ["layout.html.php"],
+            ["user", "profil.html.php"],
+            ["title" => 'Profil utilisateur', "user" => $user, "characters" => $characters]
+        );
     }
 }

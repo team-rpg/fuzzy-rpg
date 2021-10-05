@@ -18,13 +18,19 @@ class CharacterController extends AbstractController {
                 echo $e->getMessage();
             }
 
-            ob_start();
-            $title = 'Création de personnage';
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'createCharacter.html.php']);
-            $content = ob_get_clean();
+            // ob_start();
+            // $title = 'Création de personnage';
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'createCharacter.html.php']);
+            // $content = ob_get_clean();
 
-            // Appeler le layout
-            require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+            // // Appeler le layout
+            // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+            $this->renderer->render(
+                ["layout.html.php"],
+                ["user", "createCharacter.html.php"],
+                ["title" => 'Création de personnage', "classes" => $classes]
+            );
 
         } elseif ('POST' === $request_method) {
             $args = [
@@ -58,6 +64,7 @@ class CharacterController extends AbstractController {
             foreach ($charactersNameList as $characterName) {
                 if($characterName['character_nickname'] == $character_post['character_nickname']) {
                     $error_messages[] = "Nom déjà prit !";
+                    break;
                 }
             }
 
@@ -79,13 +86,19 @@ class CharacterController extends AbstractController {
                     echo $e->getMessage();
                 }
 
-                ob_start();
-                $title = 'Enregistrement utilisateur';
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'createCharacter.html.php']);
-                $content = ob_get_clean();
+                // ob_start();
+                // $title = 'Enregistrement utilisateur';
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, 'user', 'createCharacter.html.php']);
+                // $content = ob_get_clean();
 
-                // Appeler le layout
-                require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+                // // Appeler le layout
+                // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "layout.html.php"]);
+
+                $this->renderer->render(
+                    ["layout.html.php"],
+                    ["user", "createCharacter.html.php"],
+                    ["title" => 'Enregistrement utilisateur', "classes" => $classes]
+                );
             }
         }
     }

@@ -8,10 +8,6 @@ class Warrior extends Character
 {
     private int $rage;
 
-    public function __construct() {
-
-    }
-
     /**
      * Get the value of rage
      *

@@ -14,11 +14,6 @@ class Monster extends Entity
     protected string $categoryDesc;
     protected int $xp;
 
-    public function __construct()
-    {
-        
-    }
-
     public function attack(Entity $character): void {
         
         $character->takeDamage($this->MonsterDmg);

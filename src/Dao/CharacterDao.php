@@ -19,6 +19,11 @@ use App\Model\Helmet;
 
 class CharacterDao extends AbstractDao {
 
+    public function checkCharacterByName(string $name): bool {
+
+        return false;
+    }
+
     public function getAllCharacters(): array {
 
         $reqCharacter = $this->pdo->prepare("SELECT * FROM `character` INNER JOIN classe ON classe.class_id = `character`.class_id");
@@ -132,9 +137,6 @@ class CharacterDao extends AbstractDao {
 
         $characterData = $reqCharacter->fetch(PDO::FETCH_ASSOC);
 
-        $characters = [];
-
-        // foreach ($charactersData as $characterData) {
             $reqArmor = $this->pdo->prepare("SELECT * FROM armor INNER JOIN character_armor ON character_armor.armor_id = armor.armor_id WHERE character_id = :id");
             $reqArmor->execute([
                 ":id" => $characterData['character_id']
@@ -223,8 +225,6 @@ class CharacterDao extends AbstractDao {
                         ->setClassName((string)$characterData['class_name'])
                         ->setId($characterData['character_id']);
 
-            // array_push($characters, $character);
-        // }
         return $character;
     }
 

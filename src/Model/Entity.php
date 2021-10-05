@@ -17,6 +17,7 @@ abstract class Entity implements EntityInterface
         foreach ($this->equipment as $item) {
             if (get_parent_class($item) == "Weapon" && $item->getIsEquipped()) {
                 $enemy->takeDamage($item->getDamage());
+                break;
             }
         }
     }
@@ -26,6 +27,7 @@ abstract class Entity implements EntityInterface
         foreach ($this->equipment as $item) {
             if (get_parent_class($item) == "Armor" && $item->getIsEquipped()) {
                 $armure = $armure + $item->getDefense();
+                break;
             }
         }
         $this->health = $this->health - (max([$damage - $armure, 0]));
