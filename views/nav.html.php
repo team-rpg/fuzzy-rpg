@@ -22,7 +22,6 @@
     <!-- Partie admin -->
     <?php
     if (!empty($_SESSION['user']) && $_SESSION['user']['is_admin'] == 1) { ?>
-        
         <a href='/user/index'>Liste des utilisateurs</a>
     <?php
     }
