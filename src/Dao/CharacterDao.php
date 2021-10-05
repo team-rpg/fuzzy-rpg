@@ -14,9 +14,219 @@ use App\Model\Staff;
 use App\Model\Sword;
 
 use App\Model\BodyArmor;
+use App\Model\Character;
 use App\Model\Helmet;
 
 class CharacterDao extends AbstractDao {
+
+    public function getAllCharacters(): array {
+
+        $reqCharacter = $this->pdo->prepare("SELECT * FROM `character` INNER JOIN classe ON classe.class_id = `character`.class_id");
+        $reqCharacter->execute([]);
+
+        $charactersData = $reqCharacter->fetchAll(PDO::FETCH_ASSOC);
+
+        $characters = [];
+
+        foreach ($charactersData as $characterData) {
+            $reqArmor = $this->pdo->prepare("SELECT * FROM armor INNER JOIN character_armor ON character_armor.armor_id = armor.armor_id WHERE character_id = :id");
+            $reqArmor->execute([
+                ":id" => $characterData['character_id']
+            ]);
+    
+            $reqWeapon = $this->pdo->prepare("SELECT * FROM weapon INNER JOIN character_weapon ON character_weapon.weapon_id = weapon.weapon_id WHERE character_id = :id");
+            $reqWeapon->execute([
+                ":id" => $characterData['character_id']
+            ]);
+
+            $charactersArmorData = $reqArmor->fetchAll(PDO::FETCH_ASSOC);
+            $charactersWeaponData = $reqWeapon->fetchAll(PDO::FETCH_ASSOC);
+
+            $characterEquipmentsArray = [];
+            
+            foreach ($charactersArmorData as $characterArmor) {
+                switch ($characterArmor['armor_type']) {
+                    case 'Helmet':
+                        $armor = new Helmet();
+                        break;                    
+                    case 'Body':
+                        $armor = new BodyArmor();
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                $armor  ->setName($characterArmor['armor_name'])
+                        ->setDefense($characterArmor['armor_defense'])
+                        ->setType("Armor")
+                        ->setSubType($characterArmor['armor_type']);
+
+                array_push($characterEquipmentsArray, $armor);
+            }
+
+            foreach ($charactersWeaponData as $characterWeapon) {
+                
+                switch ($characterWeapon['weapon_type']) {
+                    case 'Sword':
+                        $weapon = new Sword();
+                        break;
+                    case 'Staff':
+                        $weapon = new Staff();
+                        break;
+                    case 'Bow':
+                        $weapon = new Bow();
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                $weapon ->setName($characterWeapon['weapon_name'])
+                        ->setDamage((int)$characterWeapon['weapon_dmg'])
+                        ->setType("Weapon")
+                        ->setSubType($characterWeapon['weapon_type']);
+
+                array_push($characterEquipmentsArray, $weapon);
+            }
+
+            switch ($characterData['class_name']) {
+                case 'Guerrier':
+                    $character = new Warrior();
+                    $character->setRage($characterData['character_secondary_stat']);
+                    break;
+                case 'Mage':
+                    $character = new Mage();
+                    $character->setMana($characterData['character_secondary_stat']);
+                    break;
+                case 'Archer':
+                    $character = new Archer();
+                    $character->setEnergy($characterData['character_secondary_stat']);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            $character  ->setName($characterData['character_nickname'])
+                        ->setHealth($characterData['character_health'])
+                        ->setLevel($characterData['character_level'])
+                        ->setMoney($characterData['character_money'])
+                        ->setEquipment($characterEquipmentsArray)
+                        ->setSecondaryStatName($characterData['class_secondary_stat'])
+                        ->setSecondaryStatValue($characterData['character_secondary_stat'])
+                        ->setXp($characterData['character_xp'])
+                        ->setClassName((string)$characterData['class_name'])
+                        ->setId($characterData['character_id']);
+
+            array_push($characters, $character);
+        }
+        return $characters;
+    }
+
+    public function getCharacterById(int $id): Character {
+
+
+        $reqCharacter = $this->pdo->prepare("SELECT * FROM `character` INNER JOIN classe ON classe.class_id = `character`.class_id WHERE `character`.character_id = :id");
+        $reqCharacter->execute([
+            ":id" => $id
+        ]);
+
+        $characterData = $reqCharacter->fetch(PDO::FETCH_ASSOC);
+
+        $characters = [];
+
+        // foreach ($charactersData as $characterData) {
+            $reqArmor = $this->pdo->prepare("SELECT * FROM armor INNER JOIN character_armor ON character_armor.armor_id = armor.armor_id WHERE character_id = :id");
+            $reqArmor->execute([
+                ":id" => $characterData['character_id']
+            ]);
+    
+            $reqWeapon = $this->pdo->prepare("SELECT * FROM weapon INNER JOIN character_weapon ON character_weapon.weapon_id = weapon.weapon_id WHERE character_id = :id");
+            $reqWeapon->execute([
+                ":id" => $characterData['character_id']
+            ]);
+
+            $charactersArmorData = $reqArmor->fetchAll(PDO::FETCH_ASSOC);
+            $charactersWeaponData = $reqWeapon->fetchAll(PDO::FETCH_ASSOC);
+
+            $characterEquipmentsArray = [];
+            
+            foreach ($charactersArmorData as $characterArmor) {
+                switch ($characterArmor['armor_type']) {
+                    case 'Helmet':
+                        $armor = new Helmet();
+                        break;                    
+                    case 'Body':
+                        $armor = new BodyArmor();
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                $armor  ->setName($characterArmor['armor_name'])
+                        ->setDefense($characterArmor['armor_defense'])
+                        ->setType("Armor")
+                        ->setSubType($characterArmor['armor_type']);
+
+                array_push($characterEquipmentsArray, $armor);
+            }
+
+            foreach ($charactersWeaponData as $characterWeapon) {
+                
+                switch ($characterWeapon['weapon_type']) {
+                    case 'Sword':
+                        $weapon = new Sword();
+                        break;
+                    case 'Staff':
+                        $weapon = new Staff();
+                        break;
+                    case 'Bow':
+                        $weapon = new Bow();
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                $weapon ->setName($characterWeapon['weapon_name'])
+                        ->setDamage((int)$characterWeapon['weapon_dmg'])
+                        ->setType("Weapon")
+                        ->setSubType($characterWeapon['weapon_type']);
+
+                array_push($characterEquipmentsArray, $weapon);
+            }
+
+            switch ($characterData['class_name']) {
+                case 'Guerrier':
+                    $character = new Warrior();
+                    $character->setRage($characterData['character_secondary_stat']);
+                    break;
+                case 'Mage':
+                    $character = new Mage();
+                    $character->setMana($characterData['character_secondary_stat']);
+                    break;
+                case 'Archer':
+                    $character = new Archer();
+                    $character->setEnergy($characterData['character_secondary_stat']);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            $character  ->setName($characterData['character_nickname'])
+                        ->setHealth($characterData['character_health'])
+                        ->setLevel($characterData['character_level'])
+                        ->setMoney($characterData['character_money'])
+                        ->setEquipment($characterEquipmentsArray)
+                        ->setSecondaryStatName($characterData['class_secondary_stat'])
+                        ->setSecondaryStatValue($characterData['character_secondary_stat'])
+                        ->setXp($characterData['character_xp'])
+                        ->setClassName((string)$characterData['class_name'])
+                        ->setId($characterData['character_id']);
+
+            // array_push($characters, $character);
+        // }
+        return $character;
+    }
 
     public function getAllCharactersName(): array {
 

@@ -10,7 +10,6 @@
     <br>
 
     <?php
-    
     if(isset($_SESSION['user']) && $_SESSION['user']['is_admin'] == 1) : ?>
     <a href="<?= sprintf('/user/%d/edit', $user->getUserId()) ?>">Editer l'utilisateur</a>
     <br>

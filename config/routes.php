@@ -16,3 +16,5 @@ $router->add("/user/(\d+)/deleteCharacter", ['GET'], 'App\Controller\CharacterCo
 $router->add("/bestiary/(\d+)/show", ['GET'], 'App\Controller\MonsterController', 'show', 'show');
 $router->add("/bestiary/index", ['GET'], 'App\Controller\MonsterController', 'index', 'showall');
 
+$router->add("/fight/init", ['GET', 'POST'], 'App\Controller\FightController', 'init', 'init');
+$router->add("/fight", ['POST'], 'App\Controller\FightController', 'fight', 'fight');

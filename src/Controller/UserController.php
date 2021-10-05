@@ -28,10 +28,6 @@ class UserController extends AbstractController
 
     public function new(): void
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> Enric
         $request_method = filter_input(INPUT_SERVER, "REQUEST_METHOD");
 
         if ('GET' === $request_method) {
@@ -52,10 +48,6 @@ class UserController extends AbstractController
             ];
 
             $userRegister_post = filter_input_array(INPUT_POST, $args);
-<<<<<<< HEAD
-=======
-
->>>>>>> Enric
             if (
                 isset($userRegister_post["user_firstname"]) &&
                 isset($userRegister_post["user_lastname"])  &&
@@ -63,10 +55,6 @@ class UserController extends AbstractController
                 isset($userRegister_post["user_password"])  &&
                 isset($userRegister_post['user_confirm_password'])
             ) {
-<<<<<<< HEAD
-=======
-
->>>>>>> Enric
                 if (empty(trim($userRegister_post["user_firstname"]))) {
                     $error_messages[] = "Prénom d'utilisateur inexistant";
                 }
@@ -93,17 +81,10 @@ class UserController extends AbstractController
             }
 
             $user = (new User())->setUserFirstname($userRegister_post["user_firstname"])
-<<<<<<< HEAD
-                                ->setUserLastname($userRegister_post["user_lastname"])
-                                ->setUserEmail($userRegister_post["user_email"])
-                                ->setUserPassword($userRegister_post["user_password"])
-                                ->setIsAdmin(0);
-=======
                 ->setUserLastname($userRegister_post["user_lastname"])
                 ->setUserEmail($userRegister_post["user_email"])
                 ->setUserPassword($userRegister_post["user_password"])
                 ->setIsAdmin(0);
->>>>>>> Enric
 
             if (empty($error_messages)) {
                 try {
