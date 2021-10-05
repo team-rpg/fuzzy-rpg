@@ -6,24 +6,26 @@ use App\Model\Entity;
 
 class Fight {
     
-    // TODO singleton
+    // Singleton
+    private static Fight $instance;
 
     protected Entity $opponent1;
     protected Entity $opponent2;
-    protected bool $isItOpponent1Turn;
-    protected int $turn;
+    protected bool $isItOpponent1Turn = True;
+    protected int $turn = 1;
 
-    public function __construct(
-        Entity $opponent1,
-        Entity $opponent2,
-        bool $isItOpponent1Turn = True,
-        int $turn = 1
-    ) {
-        $this->opponent1 = $opponent1;
-        $this->opponent2 = $opponent2;
-        $this->isItOpponent1Turn = $isItOpponent1Turn;
-        $this->turn = $turn;
-    }
+    // Il ne doit pas y avoir de constructeur pour un Singleton !
+    // public function __construct(
+    //     Entity $opponent1,
+    //     Entity $opponent2,
+    //     bool $isItOpponent1Turn = True,
+    //     int $turn = 1
+    // ) {
+    //     $this->opponent1 = $opponent1;
+    //     $this->opponent2 = $opponent2;
+    //     $this->isItOpponent1Turn = $isItOpponent1Turn;
+    //     $this->turn = $turn;
+    // }
 
     public function nextTurn() {
         $this->turn++;
@@ -39,6 +41,17 @@ class Fight {
         } else {
             return 0;
         }
+    }
+
+    public function endFight() {
+        // Todo?
+        return;
+    }
+
+    // Singleton
+    public static function getInstance(): Fight
+    {
+        return self::$instance ?? self::$instance = new Fight();
     }
 
 

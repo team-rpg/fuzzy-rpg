@@ -18,3 +18,4 @@ $router->add("/bestiary/index", ['GET'], 'App\Controller\MonsterController', 'in
 
 $router->add("/fight/init", ['GET', 'POST'], 'App\Controller\FightController', 'init', 'init');
 $router->add("/fight", ['POST'], 'App\Controller\FightController', 'fight', 'fight');
+$router->add("/fight/(\d+)/attack", ['GET'], 'App\Controller\FightController', 'attack', 'attack');
