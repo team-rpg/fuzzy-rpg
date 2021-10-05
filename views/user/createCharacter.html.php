@@ -21,5 +21,4 @@
     </div>
     <br>
     <input type="submit" value="Créer personnage">
-    
 </form>

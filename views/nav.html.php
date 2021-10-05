@@ -24,6 +24,10 @@
     ?>
 
     <?php
+        echo "<a href='/bestiary/index'>Bestiaire</a>";
+    ?>
+
+    <?php
     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
         echo "<a href='/user/logout'>Déconnexion</a> ";
     }
