@@ -6,10 +6,6 @@ use App\Dao\CharacterDao;
 use App\Dao\MonsterDao;
 use PDOException;
 use App\Model\Fight;
-use App\Model\Entity;
-use App\Model\Character;
-use App\Dao\UserDao;
-use Exception;
 
 class FightController extends AbstractController
 {

@@ -1,5 +1,6 @@
 <nav>
-    <?php echo "<a href='/'>Home</a> "; ?>
+
+    <a href='/'>Home</a>
 
     <?php
     if (!isset($_SESSION) || isset($_SESSION) && empty($_SESSION)) { ?>
@@ -20,18 +21,13 @@
     ?>
 
     <!-- Partie admin -->
-    <?php
-    if (!empty($_SESSION['user']) && $_SESSION['user']['is_admin'] == 1) { ?>
+    <?php if (!isset($_SESSION['user']) && isset($_SESSION['user']['is_admin']) == 1) : ?>
         <a href='/user/index'>Liste des utilisateurs</a>
-    <?php
-    }
-    ?>
+    <?php endif ?>
+
     <a href='/bestiary/index'>Bestiaire</a>
 
-    <?php
-    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) { ?>
+    <?php if (isset($_SESSION['user']) && !empty($_SESSION['user'])) : ?>
         <a href='/user/logout'>Déconnexion</a>
-    <?php
-    }
-    ?>
+    <?php endif; ?>
 </nav>

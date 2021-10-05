@@ -320,6 +320,16 @@ class UserController extends AbstractController
     public function delete(int $id): void
     {
         try {
+            $userCharacters = (new CharacterDao())->getAllUserCharacters($id);
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+
+        try {
+            foreach ($userCharacters as $character) {
+                (new CharacterDao())->deleteCharacter($character->getId());
+            }
+
             (new userDao())->deleteUser($id);
             header("Location: /");
             exit;
