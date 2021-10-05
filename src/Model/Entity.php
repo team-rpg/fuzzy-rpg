@@ -6,6 +6,8 @@ use App\Model\Equipment;
 
 abstract class Entity implements EntityInterface
 {
+    const WEAPONCLASSNAME = "App\Model\Weapon";
+    const ARMORCLASSNAME = "App\Model\Armor";
     protected string $name;
     protected int $health;
     protected int $level;
@@ -14,23 +16,29 @@ abstract class Entity implements EntityInterface
 
     public function attack(Entity $enemy): void
     {
+        // var_dump($this);
         foreach ($this->equipment as $item) {
-            if (get_parent_class($item) == "Weapon" && $item->getIsEquipped()) {
+            // TODO: only if is equipped:  && $item->getIsEquipped()
+            if (get_parent_class($item) == Entity::WEAPONCLASSNAME) {
+                
                 $enemy->takeDamage($item->getDamage());
             }
         }
+
+        return;
     }
     public function takeDamage(int $damage): void
     {
         $armure = 0;
         foreach ($this->equipment as $item) {
-            if (get_parent_class($item) == "Armor" && $item->getIsEquipped()) {
+            //TODO: only if is equipped:  && $item->getIsEquipped()
+            if (get_parent_class($item) == Entity::ARMORCLASSNAME) {
                 $armure = $armure + $item->getDefense();
             }
         }
         $this->health = $this->health - (max([$damage - $armure, 0]));
         $this->health = max([$this->health, 0]);
-        // regarder si il a une armure , si elle est equiper, on compare les degats a la valeur de l'armure  et le resultat soustraie de la vie
+        return;
     }
     
     public function loot(): Equipment

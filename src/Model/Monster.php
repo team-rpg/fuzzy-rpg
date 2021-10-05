@@ -4,8 +4,8 @@ namespace App\Model;
 
 class Monster extends Entity
 {
-    protected int $MonsterDmg;
-    protected int $MonsterDef;
+    protected int $monsterDmg;
+    protected int $monsterDef;
     protected int $id;
     protected string $desc;
     protected int    $categoryId;
@@ -20,13 +20,12 @@ class Monster extends Entity
     }
 
     public function attack(Entity $character): void {
-        
-        $character->takeDamage($this->MonsterDmg);
+        $character->takeDamage($this->monsterDmg);
     }
 
     public function takeDamage(int $damage): void {
         
-        $this->health = $this->health - (max([$damage - ($this->MonsterDef), 0]));
+        $this->health = $this->health - (max([$damage - ($this->monsterDef), 0]));
         $this->health = max([$this->health, 0]);
     }
 
@@ -38,7 +37,7 @@ class Monster extends Entity
      */
     public function getMonsterDmg(): int
     {
-        return $this->MonsterDmg;
+        return $this->monsterDmg;
     }
 
     /**
@@ -48,9 +47,9 @@ class Monster extends Entity
      *
      * @return static
      */
-    public function setMonsterDmg(int $MonsterDmg): static
+    public function setMonsterDmg(int $monsterDmg): static
     {
-        $this->MonsterDmg = $MonsterDmg;
+        $this->monsterDmg = $monsterDmg;
 
         return $this;
     }
@@ -62,7 +61,7 @@ class Monster extends Entity
      */
     public function getMonsterDef(): int
     {
-        return $this->MonsterDef;
+        return $this->monsterDef;
     }
 
     /**
@@ -72,9 +71,9 @@ class Monster extends Entity
      *
      * @return static
      */
-    public function setMonsterDef(int $MonsterDef): static
+    public function setMonsterDef(int $monsterDef): static
     {
-        $this->MonsterDef = $MonsterDef;
+        $this->monsterDef = $monsterDef;
 
         return $this;
     }

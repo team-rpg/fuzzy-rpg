@@ -5,11 +5,11 @@
     <div>
         <span>Nom du Monstre: <?= $monster->getName() ?></span>
         <br>
-        <span>Aperçu du Monstre:</br><img class="MonsterImg" alt="image d'un Monstre" src="<?= $monster->getPicture() ?>"></img></span>
+        <span>Aperçu du Monstre:<br><img class="MonsterImg" alt="image d'un Monstre" src="<?= $monster->getPicture() ?>"></img></span>
         <br>
         <span>Catégorie du Monstre: <?= $monster->getCategoryName() ?></span>
         <br>
         <a href="<?= sprintf('/bestiary/%d/show', $monster->getId()) ?>">Plus d'informations</a>
     </div>
-<br>
+    <br>
 <?php endforeach; ?>
