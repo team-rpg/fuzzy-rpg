@@ -3,6 +3,7 @@
 // $router->add();
 
 $router->add("/", ['GET'], 'App\Controller\IndexController', 'index', 'home');
+$router->add("/user/index", ['GET'], 'App\Controller\UserController', 'index', 'home');
 $router->add("/user/signup", ['GET', 'POST'], 'App\Controller\UserController', 'new', 'signup');
 $router->add("/user/signin", ['GET', 'POST'], 'App\Controller\UserController', 'signin', 'signin');
 $router->add("/user/profil", ['GET'], 'App\Controller\UserController', 'profil', 'profil');
