@@ -28,3 +28,7 @@
             <input type="password" name="user_password" class="form-control" value="<?= (isset($user)) ? $user->getUserPassword() : ""; ?>">
         </div>
     </div>
+
+    <input type="submit" value ="Editer">
+
+</form>
