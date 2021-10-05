@@ -27,7 +27,7 @@
     <div class="form-group row">
         <label class="col-sm-4 col-form-label">Password</label>
         <div class="col-sm-8">
-            <input type="password" name="user_password" class="form-control" value="<?= (isset($user)) ? $user->getUserPassword() : ""; ?>">
+            <input type="password" name="user_password" class="form-control">
         </div>
     </div>
 

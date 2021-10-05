@@ -8,9 +8,6 @@ class Archer extends Character
 {
     private int $energy;
 
-    public function __construct(
-    ) {
-    }
     /**
      * Get the value of energy
      *

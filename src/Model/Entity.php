@@ -22,6 +22,7 @@ abstract class Entity implements EntityInterface
             if (get_parent_class($item) == Entity::WEAPONCLASSNAME) {
                 
                 $enemy->takeDamage($item->getDamage());
+                break;
             }
         }
 
@@ -34,6 +35,7 @@ abstract class Entity implements EntityInterface
             //TODO: only if is equipped:  && $item->getIsEquipped()
             if (get_parent_class($item) == Entity::ARMORCLASSNAME) {
                 $armure = $armure + $item->getDefense();
+                break;
             }
         }
         $this->health = $this->health - (max([$damage - $armure, 0]));
