@@ -16,8 +16,8 @@
     <div class="form-item">
         <label for="opponent2">Adversaire 2 :</label>
         <select id="opponent2" name="opponent2">
-            <?php foreach ($characters as $character) : ?>
-                <option value=<?= $character->getId() ?>><?= $character->getName()?>, <?=$character->getClassName()?> de niveau <?=$character->getLevel()?></option>
+            <?php foreach ($monsters as $monster) : ?>
+                <option value=<?= $monster->getId() ?>><?= $monster->getName()?>, <?=$monster->getCategoryName()?></option>
             <?php endforeach; ?>
         </select>
     </div>

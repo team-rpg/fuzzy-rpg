@@ -13,7 +13,25 @@ class MonsterDao extends AbstractDao {
 
         $monstersData = $this->pdo->query("SELECT *, monster_category_name FROM monster INNER JOIN monster_category ON monster_category.monster_category_id = monster.monster_category_id");
 
-        return $monstersData->fetchAll(PDO::FETCH_ASSOC);
+        $fetchedMonsters = $monstersData->fetchAll(PDO::FETCH_ASSOC);
+
+        $monsters = [];
+
+        foreach ($fetchedMonsters as $fetchedMonster) {
+            $monster = new Monster();
+            $monster->setId($fetchedMonster["monster_id"])
+            ->setName($fetchedMonster["monster_name"])
+            ->setPicture($fetchedMonster["monster_picture"])
+            ->setHealth($fetchedMonster["monster_health"])
+            ->setMonsterDef($fetchedMonster["monster_armor"])
+            ->setMonsterDmg($fetchedMonster["monster_dmg"])
+            ->setDesc($fetchedMonster["monster_desc"])
+            ->setCategoryName($fetchedMonster["monster_category_name"])
+            ->setCategoryDesc($fetchedMonster["monster_category_desc"]);
+            $monsters[] = $monster;
+        }
+
+        return $monsters;
     }
 
     public function getMonsterByName(string $name): Monster {

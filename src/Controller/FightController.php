@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Dao\CharacterDao;
+use App\Dao\MonsterDao;
 use PDOException;
 use App\Model\Fight;
 use App\Model\Entity;
@@ -19,6 +20,7 @@ class FightController extends AbstractController
         unset($_SESSION['fight']);
         try {
             $characters = (new CharacterDao())->getAllCharacters();
+            $monsters = (new MonsterDao())->getAllMonsters();
         } catch (PDOException $e) {
             echo $e->getMessage();
             // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error500.html.php"]);
@@ -27,7 +29,7 @@ class FightController extends AbstractController
         $this->renderer->render(
             ["layout.html.php"],
             ["fight", "fightinit.html.php"],
-            ["title" => 'Début du combat', "characters" => $characters]
+            ["title" => 'Début du combat', "characters" => $characters, "monsters" => $monsters]
         );
     }
 
@@ -37,7 +39,7 @@ class FightController extends AbstractController
         if (!isset($_SESSION['fight']['opponent1'])) {
             try {
                 $opponent1 = (new CharacterDao)->getCharacterById($_POST['opponent1']);
-                $opponent2 = (new CharacterDao)->getCharacterById($_POST['opponent2']);
+                $opponent2 = (new MonsterDao)->getMonsterById($_POST['opponent2']);
             } catch (PDOException $e) {
                 echo $e->getMessage();
                 // require implode(DIRECTORY_SEPARATOR, [TEMPLATES, "error500.html.php"]);

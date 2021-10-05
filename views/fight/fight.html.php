@@ -11,6 +11,8 @@
 <p>VS</p>
 <h4>Adversaire 2 :<h4>
 <h2><?= $opponent2->getName() ?></h2>
-<h3><?= $opponent2->getClassName() ?> de niveau <?= $opponent2->getLevel() ?></h3>
+<h3><?= $opponent2->getCategoryName() ?></h3>
 <h4><?= $opponent2->getHealth() ?> points de vie restant
+
+<p>Que voulez-vous faire ?</p>
 
