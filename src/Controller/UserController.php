@@ -86,13 +86,15 @@ class UserController extends AbstractController
             $user = (new User())->setUserFirstname($userRegister_post["user_firstname"])
                 ->setUserLastname($userRegister_post["user_lastname"])
                 ->setUserEmail($userRegister_post["user_email"])
-                ->setUserPassword($userRegister_post["user_password"]);
+                ->setUserPassword($userRegister_post["user_password"])
+                ->setIsAdmin(0);
 
             if (empty($error_messages)) {
                 try {
                     $id = (new UserDao())->newUser($user);
                     header(sprintf("Location: /user/%d/show", $id));
 
+                    $_SESSION['user']['user_id'] = $id;
                     $_SESSION['user']['user_firstname'] = $userRegister_post["user_firstname"];
                     $_SESSION['user']['user_lastname'] = $userRegister_post["user_lastname"];
                     $_SESSION['user']['user_email'] = $userRegister_post["user_email"];

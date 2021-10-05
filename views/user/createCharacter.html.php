@@ -13,7 +13,6 @@
         <div>
             <select name="character_class_id" id="character_class_id">
                 <option value="null" selected>- Selectionnez une classe -</option>
-                    <?php dump($classes) ?>
                     <?php foreach ($classes as $class) : ?>
                         <option value="<?=$class['class_id'] ?>"><?= $class['class_name']?></option>
                     <?php endforeach; ?>
