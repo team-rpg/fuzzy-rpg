@@ -2,8 +2,6 @@
 
 namespace App\Model;
 
-
-
 class Monster extends Entity
 {
     protected int $MonsterDmg;
@@ -14,12 +12,12 @@ class Monster extends Entity
     protected string $picture;
     protected string $categoryName;
     protected string $categoryDesc;
+    protected int $xp;
 
     public function __construct()
     {
         
     }
-
 
     public function attack(Entity $character): void {
         
@@ -222,6 +220,30 @@ class Monster extends Entity
     public function setCategoryName(string $categoryName): static
     {
         $this->categoryName = $categoryName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of xp
+     *
+     * @return int
+     */
+    public function getXp(): int
+    {
+        return $this->xp;
+    }
+
+    /**
+     * Set the value of xp
+     *
+     * @param int $xp
+     *
+     * @return self
+     */
+    public function setXp(int $xp): self
+    {
+        $this->xp = $xp;
 
         return $this;
     }

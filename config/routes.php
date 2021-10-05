@@ -13,8 +13,8 @@ $router->add("/user/(\d+)/delete", ['GET'], 'App\Controller\UserController', 'de
 
 $router->add("/user/createCharacter", ['GET', 'POST'], 'App\Controller\CharacterController', 'createCharacter', 'create_character');
 $router->add("/user/(\d+)/deleteCharacter", ['GET'], 'App\Controller\CharacterController', 'deleteCharacter', 'delete');
-$router->add("/bestiary/(\d+)/show", ['GET'], 'App\Controller\MonsterController', 'show', 'show');
 $router->add("/bestiary/index", ['GET'], 'App\Controller\MonsterController', 'index', 'showall');
+$router->add("/bestiary/(\d+)/show", ['GET'], 'App\Controller\MonsterController', 'show', 'show');
 
 $router->add("/fight/init", ['GET', 'POST'], 'App\Controller\FightController', 'init', 'init');
 $router->add("/fight", ['POST'], 'App\Controller\FightController', 'fight', 'fight');

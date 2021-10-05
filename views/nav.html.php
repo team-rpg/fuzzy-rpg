@@ -21,7 +21,7 @@
     ?>
 
     <!-- Partie admin -->
-    <?php if (!isset($_SESSION['user']) && isset($_SESSION['user']['is_admin']) == 1) : ?>
+    <?php if (!empty($_SESSION['user']) && isset($_SESSION['user']['is_admin']) == 1) : ?>
         <a href='/user/index'>Liste des utilisateurs</a>
     <?php endif ?>
 

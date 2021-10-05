@@ -2,3 +2,5 @@ vendor/
 .idea/
 config/mysql.ini
 211001-paug-class-diagram-fuzzy-rpg-uml.mdj
+BDD-MMORPG.mdj
+mmorpg.sql
